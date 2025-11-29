@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: managed
+  name: managed-dev
   namespace: openshift-gitops
 spec:
   generators:
@@ -39,7 +39,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: managed
+  name: managed-uat
   namespace: openshift-gitops
 spec:
   generators:
@@ -77,7 +77,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: managed
+  name: managed-prod
   namespace: openshift-gitops
 spec:
   generators:

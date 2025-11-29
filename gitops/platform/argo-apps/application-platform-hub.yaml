@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     path: gitops/platform/platform-manifests/hub
-    repoURL: 'https://github.com/shirodkar/serverless-demo.git'
+    repoURL: 'https://github.com/shirodkar/demo-acm-gitops.git'
     targetRevision: HEAD
   syncPolicy:
     automated:

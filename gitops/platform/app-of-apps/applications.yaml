@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     path: gitops/platform/argo-apps
-    repoURL: 'https://github.com/shirodkar/serverless-demo.git'
+    repoURL: 'https://github.com/shirodkar/demo-acm-gitops.git'
     targetRevision: HEAD
     directory:
       recurse: true

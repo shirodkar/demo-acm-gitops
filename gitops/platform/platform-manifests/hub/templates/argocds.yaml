@@ -77,11 +77,15 @@ spec:
       route:
         enabled: false
   rbac:
-    defaultPolicy: ''
-    policy: |
+    policy.csv: |
+      p, role:none, *, *, */*, deny
       g, system:cluster-admins, role:admin
       g, cluster-admins, role:admin
-    scopes: '[groups]'
+      p, role:developers, clusters, get, *, allow
+      p, role:developers, repositories, get, *, allow
+      g, developers, role:developers
+    policy.default: role:none
+    scopes: '[accounts,groups,email]'
   repo:
     resources:
       limits:

@@ -64,6 +64,15 @@ spec:
 apiVersion: cluster.open-cluster-management.io/v1beta1
 kind: Placement
 metadata:
+  name: prod-only-placement
+  namespace: openshift-gitops
+spec:
+  clusterSets:
+    - prod-clusters
+---
+apiVersion: cluster.open-cluster-management.io/v1beta1
+kind: Placement
+metadata:
   name: prod-1-only-placement
   namespace: openshift-gitops
 spec:

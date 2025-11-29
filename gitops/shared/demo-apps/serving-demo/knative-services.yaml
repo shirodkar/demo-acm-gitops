@@ -1,0 +1,24 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: rollouts-demo
+spec:
+  template:
+    spec:
+      containerConcurrency: 1
+      containers:
+        - image: 'quay.io/openshiftdemos/rollouts-demo:blue'
+          name: rollouts-demo
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 200m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 256Mi
+  traffic:
+    - latestRevision: true
+      percent: 100

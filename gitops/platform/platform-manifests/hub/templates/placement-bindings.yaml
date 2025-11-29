@@ -1,0 +1,27 @@
+apiVersion: policy.open-cluster-management.io/v1
+kind: PlacementBinding
+metadata:
+  name: install-operators-on-managed-clusters
+  namespace: openshift-gitops
+placementRef:
+  name: all-managed-placement
+  kind: Placement
+  apiGroup: cluster.open-cluster-management.io
+subjects:
+  - name: install-runtime-operators
+    kind: Policy
+    apiGroup: policy.open-cluster-management.io
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PlacementBinding
+metadata:
+  name: install-operators-on-hub-cluster
+  namespace: openshift-gitops
+placementRef:
+  name: hub-only-placement
+  kind: Placement
+  apiGroup: cluster.open-cluster-management.io
+subjects:
+  - name: install-platform-operators
+    kind: Policy
+    apiGroup: policy.open-cluster-management.io

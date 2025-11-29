@@ -1,0 +1,9 @@
+apiVersion: console.openshift.io/v1
+kind: ConsoleNotification
+metadata:
+  name: banner
+spec:
+  backgroundColor: blue
+  color: white
+  location: BannerTop
+  text: 'MANAGED ({{ .Values.managedservername }})'

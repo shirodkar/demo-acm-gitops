@@ -1,0 +1,9 @@
+apiVersion: console.openshift.io/v1
+kind: ConsoleNotification
+metadata:
+  name: banner
+spec:
+  backgroundColor: green
+  color: white
+  location: BannerTop
+  text: HUB

@@ -1,47 +1,47 @@
 apiVersion: cluster.open-cluster-management.io/v1beta2
 kind: ManagedClusterSetBinding
 metadata:
-  name: hub-only
+  name: hub-clusters
   namespace: openshift-gitops
 spec:
-  clusterSet: hub-only
+  clusterSet: hub-clusters
 ---
 apiVersion: cluster.open-cluster-management.io/v1beta2
 kind: ManagedClusterSetBinding
 metadata:
-  name: dev-only
+  name: dev-clusters
   namespace: openshift-gitops
 spec:
-  clusterSet: dev-only
+  clusterSet: dev-clusters
 ---
 apiVersion: cluster.open-cluster-management.io/v1beta2
 kind: ManagedClusterSetBinding
 metadata:
-  name: dev-only
+  name: dev-clusters
   namespace: shared-gitops
 spec:
-  clusterSet: dev-only
+  clusterSet: dev-clusters
 ---
 apiVersion: cluster.open-cluster-management.io/v1beta2
 kind: ManagedClusterSetBinding
 metadata:
-  name: qa-only
+  name: qa-clusters
   namespace: openshift-gitops
 spec:
-  clusterSet: qa-only
+  clusterSet: qa-clusters
 ---
 apiVersion: cluster.open-cluster-management.io/v1beta2
 kind: ManagedClusterSetBinding
 metadata:
-  name: uat-only
+  name: uat-clusters
   namespace: openshift-gitops
 spec:
-  clusterSet: uat-only
+  clusterSet: uat-clusters
 ---
 apiVersion: cluster.open-cluster-management.io/v1beta2
 kind: ManagedClusterSetBinding
 metadata:
-  name: prod-only
+  name: prod-clusters
   namespace: openshift-gitops
 spec:
-  clusterSet: prod-only
+  clusterSet: prod-clusters

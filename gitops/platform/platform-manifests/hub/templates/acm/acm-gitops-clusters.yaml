@@ -22,4 +22,4 @@ spec:
   placementRef:
     apiVersion: cluster.open-cluster-management.io/v1beta1
     kind: Placement
-    name: dev-only-placement
+    name: all-managed-placement

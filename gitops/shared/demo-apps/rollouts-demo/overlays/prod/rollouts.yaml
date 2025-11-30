@@ -1,5 +1,5 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: rollouts-demo
   labels:
@@ -27,3 +27,22 @@ spec:
             requests:
               cpu: 50m
               memory: 32Mi
+  strategy:
+    canary:
+      canaryService: canary-service
+      stableService: stable-service
+      steps:
+      - setWeight: 20
+      - pause: {}
+      - setWeight: 40
+      - pause: {duration: 10s}
+      - setWeight: 60
+      - pause: {duration: 10s}
+      - setWeight: 80
+      - pause: {duration: 10s}
+      trafficRouting:
+        plugins:
+          argoproj-labs/openshift:
+            routes:
+              - rollouts-demo
+            

@@ -84,7 +84,7 @@ spec:
       p, role:developers, clusters, get, *, allow
       p, role:developers, repositories, get, *, allow
       g, developers, role:developers
-    policy.default: role:none
+    defaultPolicy: role:none
     scopes: '[accounts,groups,email]'
   repo:
     resources:

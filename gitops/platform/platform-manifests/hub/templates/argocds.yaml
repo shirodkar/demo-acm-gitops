@@ -81,8 +81,7 @@ spec:
       p, role:none, *, *, */*, deny
       g, system:cluster-admins, role:admin
       g, cluster-admins, role:admin
-      p, role:developers, clusters, get, *, allow
-      p, role:developers, repositories, get, *, allow
+      p, role:developers, *, get, *, allow
       g, developers, role:developers
     defaultPolicy: role:none
     scopes: '[accounts,groups,email]'

@@ -10,6 +10,7 @@ metadata:
   namespace: shared-gitops
 spec:
   server:
+    enableRolloutsUI: true
     autoscale:
       enabled: false
     grpc:

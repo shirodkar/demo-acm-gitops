@@ -22,11 +22,9 @@ spec:
         server: "{{server}}"
       project: default
       source:
-        path: gitops/shared/demo-apps/rollouts-demo
+        path: gitops/shared/demo-apps/rollouts-demo/overlays/dev
         repoURL: 'https://github.com/shirodkar/acm-gitops-demo.git'
         targetRevision: HEAD
-        directory:
-          recurse: true
       syncPolicy:
         automated:
           enabled: true

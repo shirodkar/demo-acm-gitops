@@ -77,7 +77,7 @@ spec:
       route:
         enabled: false
   rbac:
-    policy.csv: |
+    policy: |
       p, role:none, *, *, */*, deny
       g, system:cluster-admins, role:admin
       g, cluster-admins, role:admin

@@ -1,4 +1,4 @@
-{{- define "managed.hostFromApiURL" -}}
+{{- define "getbaseurl" -}}
 {{- $url := . -}}
 {{- $url | regexReplaceAll "^https?://" "" | regexReplaceAll ":[0-9]+$" "" | regexReplaceAll "^api\\." "" | trim -}}
 {{- end -}}
@@ -34,7 +34,7 @@ spec:
             - name: bannercolor
               value: blue
             - name: serverurl
-              value: '{{ include "managed.hostFromApiURL" server }}'
+              value: '{{ include "getbaseurl" server }}'
       syncPolicy:
         automated:
           enabled: true

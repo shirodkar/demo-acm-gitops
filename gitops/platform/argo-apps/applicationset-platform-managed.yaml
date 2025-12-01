@@ -19,7 +19,7 @@ spec:
         server: "{{server}}"
       project: default
       source:
-        path: gitops/platform/platform-manifests/managed
+        path: gitops/platform/platform-manifests/managed/overlays/dev
         repoURL: 'https://github.com/shirodkar/acm-gitops-demo.git'
         targetRevision: HEAD
         helm:

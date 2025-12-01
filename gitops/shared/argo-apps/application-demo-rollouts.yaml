@@ -18,7 +18,7 @@ spec:
       name: demo-rollouts-{{name}}
       annotations:
         apps.open-cluster-management.io/ocm-managed-cluster: "{{name}}"
-        apps.open-cluster-management.io/ocm-managed-cluster-app-namespace: shared-gitops
+        apps.open-cluster-management.io/ocm-managed-cluster-app-namespace: demo-rollouts
         argocd.argoproj.io/skip-reconcile: "true"
       labels:
         apps.open-cluster-management.io/pull-to-ocm-managed-cluster: "true"

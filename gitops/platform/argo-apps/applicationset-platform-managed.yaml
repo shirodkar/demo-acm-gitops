@@ -42,7 +42,7 @@ spec:
             - name: bannercolor
               value: blue
             - name: serverbaseurl
-              value: '{{ include "getbaseurl" server }}'
+              value: '{{ server }}'
       syncPolicy:
         automated:
           enabled: true

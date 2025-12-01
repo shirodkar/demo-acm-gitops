@@ -16,12 +16,6 @@ spec:
   template:
     metadata:
       name: demo-rollouts-{{name}}
-      annotations:
-        apps.open-cluster-management.io/ocm-managed-cluster: "{{name}}"
-        apps.open-cluster-management.io/ocm-managed-cluster-app-namespace: shared-gitops
-        argocd.argoproj.io/skip-reconcile: "true"
-      labels:
-        apps.open-cluster-management.io/pull-to-ocm-managed-cluster: "true"
     spec:
       destination:
         namespace: demo-rollouts

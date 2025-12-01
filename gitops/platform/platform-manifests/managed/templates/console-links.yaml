@@ -1,6 +1,6 @@
 {{- define "getBaseUrl" -}}
 {{- $url := . -}}
-{{- $url -}}
+{{- $url | regexReplaceAll "^https://" ""  -}}
 {{- end -}}
 
 apiVersion: console.openshift.io/v1

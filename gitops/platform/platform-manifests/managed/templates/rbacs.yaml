@@ -17,7 +17,7 @@ metadata:
   name: gitops-appset--role-binding
 subjects:
   - kind: ServiceAccount
-    name: shared-gitops-argocd-applicationset-controller
+    name: shared-gitops-applicationset-controller
     namespace: shared-gitops
 roleRef:
   apiGroup: rbac.authorization.k8s.io

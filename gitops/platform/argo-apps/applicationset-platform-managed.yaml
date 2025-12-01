@@ -33,8 +33,8 @@ spec:
               value: '{{name}}'
             - name: bannercolor
               value: blue
-            - name: serverurl
-              value: '{{ include "getbaseurl" server }}'
+            - name: serverbaseurl
+              value: 'apps.{{ include "getbaseurl" server }}'
       syncPolicy:
         automated:
           enabled: true

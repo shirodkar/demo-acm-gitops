@@ -1,7 +1,15 @@
-{{- define "getbaseurl" -}}
-{{- $url := . -}}
-{{- $url | regexReplaceAll "^https?://" "" | regexReplaceAll ":[0-9]+$" "" | regexReplaceAll "^api\\." "" | trim -}}
+'{{- define "getbaseurl" -}}
+  {{- $url := . -}}
+  {{- $baseurl := $url
+      | regexReplaceAll "^https?://" ""      /* remove scheme */
+      | regexReplaceAll ":[0-9]+$" ""        /* remove trailing port */
+      | trim                                 /* final cleanup */
+  -}}
+  {{- printf "https://%s" $baseurl -}}
 {{- end -}}
+
+{{/* Usage: include "getbaseurl" .Values.sharedgitopsurl */}}
+{{- end -}}'
 
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet

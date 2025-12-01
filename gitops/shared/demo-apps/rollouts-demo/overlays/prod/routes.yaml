@@ -4,6 +4,9 @@ metadata:
   name: rollouts-demo
   labels:
     app: rollouts-demo
+  annotations:
+    haproxy.router.openshift.io/disable_cookies: 'true'
+    haproxy.router.openshift.io/balance: roundrobin
 spec:
   to:
     kind: Service

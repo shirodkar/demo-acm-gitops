@@ -1,6 +1,11 @@
 kind: Namespace
 apiVersion: v1
 metadata:
+  name: shared-gitops
+---
+kind: Namespace
+apiVersion: v1
+metadata:
   name: demo-rollouts
   labels:
     argocd.argoproj.io/managed-by: shared-gitops

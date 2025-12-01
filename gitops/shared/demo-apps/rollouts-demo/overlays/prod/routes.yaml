@@ -8,5 +8,8 @@ spec:
   to:
     kind: Service
     name: stable-service
+  alternateBackends:
+    - kind: Service
+      name: canary-service
   port:
     targetPort: 8080-tcp

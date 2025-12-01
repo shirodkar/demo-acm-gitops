@@ -1,9 +1,4 @@
-{{- /*
-     helper: hostFromApiURL
-     Purpose: take a full API URL and return a trimmed hostname without scheme,
-              leading "api." and without a trailing port (eg. :6443).
-  */ -}}
-{{- define "managed.hostFromApiURL" -}}
+{{- define "getBaseUrl" -}}
 {{- $url := . -}}
 {{- $url | regexReplaceAll "^https?://" "" | regexReplaceAll ":[0-9]+$" "" | regexReplaceAll "^api\\." "" | trim -}}
 {{- end -}}

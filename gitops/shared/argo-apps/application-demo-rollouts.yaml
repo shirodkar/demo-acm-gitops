@@ -26,7 +26,7 @@ spec:
       destination:
         namespace: demo-rollouts
         server: "{{server}}"
-      project: default
+      project: project-demo-rollouts
       source:
         path: gitops/shared/demo-apps/rollouts-demo/overlays/dev
         repoURL: 'https://github.com/shirodkar/acm-gitops-demo.git'

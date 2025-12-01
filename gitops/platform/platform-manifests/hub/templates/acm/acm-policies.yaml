@@ -35,6 +35,12 @@ spec:
             channel: latest
             source: redhat-operators
             sourceNamespace: openshift-marketplace
+            config:
+              env:
+                - name: NAMESPACE_SCOPED_ARGO_ROLLOUTS
+                  value: 'false'
+                - name: CLUSTER_SCOPED_ARGO_ROLLOUTS_NAMESPACES
+                  value: demo-rollouts
           upgradeApproval: Automatic
     - objectDefinition:
         apiVersion: policy.open-cluster-management.io/v1beta1
@@ -74,4 +80,10 @@ spec:
             channel: latest
             source: redhat-operators
             sourceNamespace: openshift-marketplace
+            config:
+              env:
+                - name: NAMESPACE_SCOPED_ARGO_ROLLOUTS
+                  value: 'false'
+                - name: CLUSTER_SCOPED_ARGO_ROLLOUTS_NAMESPACES
+                  value: demo-rollouts
           upgradeApproval: Automatic

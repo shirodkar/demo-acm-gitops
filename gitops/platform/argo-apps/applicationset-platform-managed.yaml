@@ -34,7 +34,7 @@ spec:
             - name: bannercolor
               value: blue
             - name: serverurl
-              value: '{{server}}'
+              value: '{{ include "managed.hostFromApiURL" server }}'
       syncPolicy:
         automated:
           enabled: true

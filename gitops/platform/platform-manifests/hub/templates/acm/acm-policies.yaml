@@ -116,43 +116,49 @@ spec:
         apiVersion: templates.gatekeeper.sh/v1beta1
         kind: ConstraintTemplate
         metadata:
-          name: k8srequiredlabels
-          annotations:
-            policy.open-cluster-management.io/severity: low 
+          name: k8sminreplicas
         spec:
           crd:
             spec:
               names:
-                kind: K8sRequiredLabels
+                kind: K8sMinReplicas
               validation:
                 openAPIV3Schema:
                   properties:
-                    labels:
-                      type: array
-                      items: string
+                    # Optional parameter support can be added later
+                    minReplicas:
+                      type: integer
           targets:
-            - target: admission.k8s.gatekeeper.sh
-              rego: |
-                package k8srequiredlabels
-                violation[{"msg": msg, "details": {"missing_labels": missing}}] {
-                  provided := {label | input.review.object.metadata.labels[label]}
-                  required := {label | label := input.parameters.labels[_]}
-                  missing := required - provided
-                  count(missing) > 0
-                  msg := sprintf("you must provide labels: %v", [missing])
-                }
+          - target: admission.k8s.gatekeeper.sh/v1
+            rego: |
+              package k8sminreplicas
+
+              # Deny Deployments in namespace "demo-rollouts" with replicas < 5
+              violation[{
+                "msg": msg
+              }] {
+                obj := input.review.object
+                # Only evaluate Deployments (other kinds can be added later)
+                obj.kind == "Deployment"
+                obj.metadata.namespace == "demo-rollouts"
+                not has_min_replicas(obj)
+                msg := sprintf("Deployment '%s' in namespace '%s' must have at least %v replicas", [obj.metadata.name, obj.metadata.namespace, 5])
+              }
+
+              has_min_replicas(obj) {
+                # If replicas is absent treat it as zero (violation)
+                obj.spec.replicas >= 5
+              }
     - objectDefinition:
         apiVersion: constraints.gatekeeper.sh/v1beta1
-        kind: K8sRequiredLabels
+        kind: K8sMinReplicas
         metadata:
-          name: ns-must-have-gk
-          annotations:
-            policy.open-cluster-management.io/severity: low 
+          name: demo-rollouts-min-replicas
         spec:
           enforcementAction: dryrun
           match:
             kinds:
-              - apiGroups: [""]
-                kinds: ["Namespace"]
-          parameters:
-            labels: ["gatekeeper"]
+            - apiGroups: ["apps"]
+              kinds: ["Deployment"]
+            namespaceSelector:
+              matchNames: ["demo-rollouts"]

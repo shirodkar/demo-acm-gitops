@@ -39,8 +39,6 @@ spec:
       requests:
         cpu: 400m
         memory: 120Mi
-  nodeSelector:
-    region: "EMEA"
   affinity:
     podAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
@@ -48,15 +46,3 @@ spec:
             matchLabels:
               auditKey: "auditValue"
           topologyKey: topology.kubernetes.io/zone
-  tolerations:
-    - key: "Example"
-      operator: "Exists"
-      effect: "NoSchedule"
-  podAnnotations:
-    some-annotation: "this is a test"
-    other-annotation: "another test"
-  config: 
-    matches:
-      - excludedNamespaces: ["test-*", "my-namespace"]
-        processes: ["*"]
-    disableDefaultMatches: false 

@@ -109,7 +109,7 @@ metadata:
   name: require-gatekeeper-labels-on-ns
   namespace: openshift-gitops
 spec:
-  remediationAction: inform 
+  remediationAction: enforce 
   disabled: false
   policy-templates:
     - objectDefinition:
@@ -155,7 +155,7 @@ spec:
         metadata:
           name: demo-rollouts-min-replicas
         spec:
-          enforcementAction: dryrun
+          enforcementAction: deny
           match:
             kinds:
             - apiGroups: ["apps"]

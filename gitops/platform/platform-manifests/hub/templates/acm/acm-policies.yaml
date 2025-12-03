@@ -57,6 +57,21 @@ spec:
             source: redhat-operators
             sourceNamespace: openshift-marketplace
           upgradeApproval: Automatic
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1beta1
+        kind: OperatorPolicy
+        metadata:
+          name: install-gatekeeper-operator
+        spec:
+          complianceType: musthave
+          remediationAction: enforce
+          severity: critical
+          subscription:
+            name: gatekeeper-operator-product
+            channel: stable
+            source: redhat-operators
+            sourceNamespace: openshift-marketplace
+          upgradeApproval: Automatic
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: Policy

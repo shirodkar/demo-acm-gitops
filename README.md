@@ -44,22 +44,38 @@ Note: RBAC for these users will be automatically set up via GitOps in the next s
 
 ### Deploying an application Manually using the ACM Console
 
-1. TBD
+1. 'Applications=>Create application=>Argo CD ApplicationSet - Push Model'
+2. Enter the following values in the wizard:
+    - Name: book-import
+    - Argo server: shared-gitops
+    - Repository type: Git
+    - Git URL: https://github.com/shirodkar/book-import.git
+    - Git Revision: master-no-pre-post
+    - Git Path: book-import
+    - Remote Namespace: book-import
+    - Placement: Existing Placement - dev-only-placement
+3. Click 'Submit'.
+4. Wait for successful deployment in Shared Argo CD at: https://shared-gitops-server-shared-gitops.<base url of hub cluster>
+5. View the ACM Topology at 'Applications=>book-import=>Topology'
 
 ### Deploying an application using GitOps and visualizing it in ACM
 
-#### Push Model
+1. Log into the Hub cluster from command line as 'developer'.
+2. Run the following command to deploy the 'rollouts-demo' application in all environments: 
+```oc apply -f gitops/shared/app-of-apps/applications.yaml```
+
+#### Push Model (in dev)
 
 1. TBD
 
-#### Pull Model
+#### Pull Model (in uat)
 
 1. TBD
 
-### Deploying an Application using Progressive Delivery
+### Using Gatekeeper (OPA Policy) for controlling Deployment (in uat)
 
 1. TBD
 
-### Using OPA Policies for controlling Deployments
+### Deploying an Application using Progressive Delivery (in prod)
 
 1. TBD

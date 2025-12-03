@@ -57,10 +57,15 @@ Note: RBAC for these users will be automatically set up via GitOps in the next s
     - Git Revision: master-no-pre-post
     - Git Path: book-import
     - Remote Namespace: book-import
-    - Placement: Existing Placement - dev-only-placement
+    - Placement: Existing Placement - all-managed-placement
 3. Click 'Submit'.
 4. Wait for successful deployment in Shared Argo CD at: https://shared-gitops-server-shared-gitops.<base url of hub cluster>
 5. View the ACM Topology at 'Applications=>book-import=>Topology'
+
+### Using Gatekeeper (OPA Policy) for controlling Deployment (in uat)
+
+1. Verify that the 'book-import' application is not deployed in uat.
+2. Check the ACM Governance Policy that requires at least 10 replicas. This Gatekeeper OPA policy is active in uat only.
 
 ### Deploying an application using GitOps and visualizing it in ACM
 
@@ -75,12 +80,13 @@ Note: RBAC for these users will be automatically set up via GitOps in the next s
 
 #### Pull Model (in uat)
 
-1. TBD
-
-### Using Gatekeeper (OPA Policy) for controlling Deployment (in uat)
-
-1. TBD
+1. View the ACM Topology at 'Applications=>demo-rollouts-uat=>Topology'
+2. View the apps in Shared Argo CD.
 
 ### Deploying an Application using Progressive Delivery (in prod)
 
-1. TBD
+1. View the ACM Topology at 'Applications=>demo-rollouts-uat=>Topology'
+2. View the apps in Shared Argo CD.
+3. View the paused status in Argo Rollouts UI.
+4. View the application UI. It should show partial rollout - 20%.
+4. Promote the rollout, and watch the application UI progress to 100% rollout.

@@ -66,3 +66,112 @@ spec:
                 - name: CLUSTER_SCOPED_ARGO_ROLLOUTS_NAMESPACES
                   value: demo-rollouts
           upgradeApproval: Automatic
+---
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1beta1
+        kind: OperatorPolicy
+        metadata:
+          name: install-gatekeeper-operator
+        spec:
+          complianceType: musthave
+          remediationAction: enforce
+          severity: critical
+          subscription:
+            name: gatekeeper-operator-product
+            channel: stable
+            source: redhat-operators
+            sourceNamespace: openshift-marketplace
+          upgradeApproval: Automatic
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+@@ -101,89 +86,4 @@ spec:
+                  value: 'false'
+                - name: CLUSTER_SCOPED_ARGO_ROLLOUTS_NAMESPACES
+                  value: demo-rollouts
+          upgradeApproval: Automatic
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  name: install-gatekeeper-operator
+  namespace: openshift-gitops
+spec:
+  disabled: false
+  policy-templates:
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1beta1
+        kind: OperatorPolicy
+        metadata:
+          name: install-gatekeeper-operator
+        spec:
+          complianceType: musthave
+          remediationAction: enforce
+          severity: critical
+          subscription:
+            name: gatekeeper-operator-product
+            channel: stable
+            source: redhat-operators
+            sourceNamespace: openshift-marketplace
+          upgradeApproval: Automatic
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  name: require-minimum-replicas
+  namespace: openshift-gitops
+spec:
+  remediationAction: enforce 
+  disabled: false
+  policy-templates:
+    - objectDefinition:
+        apiVersion: templates.gatekeeper.sh/v1beta1
+        kind: ConstraintTemplate
+        metadata:
+          name: k8sminreplicas
+        spec:
+          crd:
+            spec:
+              names:
+                kind: K8sMinReplicas
+              validation:
+                openAPIV3Schema:
+                  properties:
+                    # Optional parameter support can be added later
+                    minReplicas:
+                      type: integer
+          targets:
+          - target: admission.k8s.gatekeeper.sh
+            rego: |
+              package k8sminreplicas
+
+              # Deny Deployment "rollouts-demo" in namespace "demo-rollouts" with replicas < 5
+              violation[{
+                "msg": msg
+              }] {
+                obj := input.review.object
+                # Only evaluate Deployments named "rollouts-demo"
+                obj.kind == "Deployment"
+                obj.metadata.namespace == "book-import"
+                obj.metadata.name == "book-import"
+                not has_min_replicas(obj)
+                msg := sprintf("Deployment '%s' in namespace '%s' must have at least %v replicas", [obj.metadata.name, obj.metadata.namespace, 5])
+              }
+
+              has_min_replicas(obj) {
+                # If replicas is absent treat it as zero (violation)
+                obj.spec.replicas >= 10
+              }
+    - objectDefinition:
+        apiVersion: constraints.gatekeeper.sh/v1beta1
+        kind: K8sMinReplicas
+        metadata:
+          name: demo-rollouts-min-replicas
+        spec:
+          enforcementAction: deny
+          match:
+            kinds:
+            - apiGroups: ["apps"]
+              kinds: ["Deployment"]
+            namespaceSelector:
+              matchNames: ["book-import"]

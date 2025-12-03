@@ -136,7 +136,7 @@ spec:
 
               has_min_replicas(obj) {
                 # If replicas is absent treat it as zero (violation)
-                obj.spec.replicas >= 10
+                obj.spec.replicas >= 5
               }
     - objectDefinition:
         apiVersion: constraints.gatekeeper.sh/v1beta1

@@ -25,27 +25,6 @@ spec:
         apiVersion: policy.open-cluster-management.io/v1beta1
         kind: OperatorPolicy
         metadata:
-          name: install-gitops-operator
-        spec:
-          complianceType: musthave
-          remediationAction: enforce
-          severity: critical
-          subscription:
-            name: openshift-gitops-operator
-            channel: latest
-            source: redhat-operators
-            sourceNamespace: openshift-marketplace
-            config:
-              env:
-                - name: NAMESPACE_SCOPED_ARGO_ROLLOUTS
-                  value: 'false'
-                - name: CLUSTER_SCOPED_ARGO_ROLLOUTS_NAMESPACES
-                  value: demo-rollouts
-          upgradeApproval: Automatic
-    - objectDefinition:
-        apiVersion: policy.open-cluster-management.io/v1beta1
-        kind: OperatorPolicy
-        metadata:
           name: install-devspaces-operator
         spec:
           complianceType: musthave

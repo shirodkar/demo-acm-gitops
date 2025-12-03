@@ -8,4 +8,8 @@ images:
   - name: quay.io/openshiftdemos/rollouts-demo
     newTag: blue
 
+replicas:
+  - name: rollouts-demo
+    count: 2
+
 

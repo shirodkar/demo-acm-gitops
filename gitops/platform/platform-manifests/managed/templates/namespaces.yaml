@@ -9,3 +9,10 @@ metadata:
   name: demo-rollouts
   labels:
     argocd.argoproj.io/managed-by: shared-gitops
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: book-import
+  labels:
+    argocd.argoproj.io/managed-by: shared-gitops

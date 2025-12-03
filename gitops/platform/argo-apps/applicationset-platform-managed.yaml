@@ -41,6 +41,46 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
+  name: managed-qa
+  namespace: openshift-gitops
+spec:
+  generators:
+    - clusterDecisionResource:
+        configMapRef: acm-placement
+        labelSelector:
+          matchLabels:
+            cluster.open-cluster-management.io/placement: qa-only-placement
+        requeueAfterSeconds: 180
+  template:
+    metadata:
+      name: managed-{{name}}
+    spec:
+      destination:
+        server: "{{server}}"
+      project: default
+      source:
+        path: gitops/platform/platform-manifests/managed
+        repoURL: 'https://github.com/shirodkar/acm-gitops-demo.git'
+        targetRevision: HEAD
+        helm:
+          parameters:
+            - name: managedservername
+              value: '{{name}}'
+            - name: bannercolor
+              value: purple
+            - name: serverurl
+              value: '{{ server }}'
+      syncPolicy:
+        automated:
+          enabled: true
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
   name: managed-uat
   namespace: openshift-gitops
 spec:

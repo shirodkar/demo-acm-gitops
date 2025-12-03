@@ -128,7 +128,7 @@ spec:
   disabled: false
   policy-templates:
     - objectDefinition:
-        apiVersion: templates.gatekeeper.sh/v1
+        apiVersion: templates.gatekeeper.sh/v1beta1
         kind: ConstraintTemplate
         metadata:
           name: k8sminreplicas
@@ -156,7 +156,7 @@ spec:
                 # Only evaluate Deployments named "rollouts-demo"
                 obj.kind == "Deployment"
                 obj.metadata.namespace == "demo-rollouts"
-                obj.metadata.namespace == "rollouts-demo"
+                obj.metadata.name == "rollouts-demo"
                 not has_min_replicas(obj)
                 msg := sprintf("Deployment '%s' in namespace '%s' must have at least %v replicas", [obj.metadata.name, obj.metadata.namespace, 5])
               }
@@ -165,3 +165,16 @@ spec:
                 # If replicas is absent treat it as zero (violation)
                 obj.spec.replicas >= 5
               }
+    - objectDefinition:
+        apiVersion: constraints.gatekeeper.sh/v1beta1
+        kind: K8sMinReplicas
+        metadata:
+          name: demo-rollouts-min-replicas
+        spec:
+          enforcementAction: deny
+          match:
+            kinds:
+            - apiGroups: ["apps"]
+              kinds: ["Deployment"]
+            namespaceSelector:
+              matchNames: ["demo-rollouts"]

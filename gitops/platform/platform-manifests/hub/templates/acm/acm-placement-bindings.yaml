@@ -15,14 +15,14 @@ subjects:
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
 metadata:
-  name: install-gitops-operators-on-hub-cluster
+  name: install-gitops-operator-on-hub-cluster
   namespace: openshift-gitops
 placementRef:
   name: hub-only-placement
   kind: Placement
   apiGroup: cluster.open-cluster-management.io
 subjects:
-  - name: install-gitops-operators
+  - name: install-gitops-operator
     kind: Policy
     apiGroup: policy.open-cluster-management.io
 ---

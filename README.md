@@ -81,7 +81,7 @@ Note: RBAC for these users will be automatically set up via GitOps in the next s
 
 1. View the ACM Topology at 'Applications=>demo-rollouts-dev=>Topology'
 
-#### Pull Model (in uat)
+#### Pull Model (in qa)
 
 1. View the ACM Topology at 'Applications=>demo-rollouts-uat=>Topology'
 2. View the apps in Shared Argo CD.

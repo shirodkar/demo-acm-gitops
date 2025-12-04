@@ -73,6 +73,7 @@ Note: RBAC for these users will be automatically set up via GitOps in the next s
 2. Run the following command to deploy the 'rollouts-demo' application in all environments: 
 ```oc apply -f gitops/shared/app-of-apps/applications.yaml```
 3. Wait for successful deployment in Shared Argo CD at: https://shared-gitops-server-shared-gitops.<base url of hub cluster>
+4. View the ApplicationSets source code.
 
 #### Push Model (in dev)
 
@@ -82,6 +83,7 @@ Note: RBAC for these users will be automatically set up via GitOps in the next s
 
 1. View the ACM Topology at 'Applications=>demo-rollouts-uat=>Topology'
 2. View the apps in Shared Argo CD.
+3. View the ACM annotations in the source code.
 
 ### Deploying an Application using Progressive Delivery (in prod)
 

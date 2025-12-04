@@ -6,5 +6,5 @@ resources:
 
 images:
   - name: quay.io/openshiftdemos/rollouts-demo
-    newTag: blue
+    newTag: green
 

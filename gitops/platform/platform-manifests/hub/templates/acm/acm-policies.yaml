@@ -147,5 +147,5 @@ spec:
             kinds:
             - apiGroups: ["apps"]
               kinds: ["Deployment"]
-            namespaceSelector:
-              matchNames: ["book-import"]
+            namespaces:
+              - "book-import"

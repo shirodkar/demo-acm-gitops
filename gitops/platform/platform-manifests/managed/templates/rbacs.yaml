@@ -38,6 +38,13 @@ metadata:
 users:
   - developer
 ---
+kind: Group
+apiVersion: user.openshift.io/v1
+metadata:
+  name: testers
+users:
+  - tester
+---
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
@@ -63,3 +70,16 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: edit
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: testers-as-viewers
+subjects:
+  - kind: Group
+    apiGroup: rbac.authorization.k8s.io
+    name: testers
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: view

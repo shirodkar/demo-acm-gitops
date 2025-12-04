@@ -44,6 +44,8 @@ Note: RBAC for these users will be automatically set up via GitOps in the next s
 
 **Note:** ACM Policies and GitOps manifests will be automatically applied to the imported Managed clusters. It could take about 5-10 minutes for the installation to complete on the managed clusters. Wait until all apps in ArgoCD are Healthy and Synced.
 
+**TBD:** On the uat cluster, the Gatekeeper instance is not created automatically. It needs to be manually created for now.
+
 ## Demo
 
 ### Deploying an application Manually using the ACM Console
